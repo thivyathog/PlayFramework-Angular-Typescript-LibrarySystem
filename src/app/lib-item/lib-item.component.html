@@ -1,0 +1,178 @@
+<h1>
+  Library Items:
+</h1>
+
+<div class="example-container">
+  <label>Search</label>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="byTitle" id="search" (keyup)="getTitle()">
+  </mat-form-field>
+  <i class="material-icons">
+    search
+  </i>
+</div>
+<table mat-table class="mat-elevation-z8" [dataSource]="combineArray" style="display:none" id="searchTable">
+
+  <ng-container matColumnDef="isbn">
+    <th mat-header-cell *matHeaderCellDef>ISBN</th>
+    <td mat-cell *matCellDef="let combineAr">{{combineAr.isbn}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type of the Item: <br></th>
+    <td mat-cell *matCellDef="let combineAr">{{combineAr.type}}</td>
+
+
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title of the Item:<br></th>
+    <td mat-cell *matCellDef="let combineAr">{{combineAr.theTitle}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="Available">
+    <th mat-header-cell *matHeaderCellDef>Available/Not Available: <br></th>
+    <td mat-cell *matCellDef="let combineAr"><i class="material-icons"
+                                                *ngIf="combineAr.currentReader;else templateName">
+      how_to_reg
+    </i></td>
+    <ng-template #templateName>
+      <td>
+        <img src="green.png" style="  width:10%; height:10%;">
+
+      </td>
+    </ng-template>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displaySearch"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displaySearch;"></tr>
+
+</table>
+<h2>Book:</h2>
+<table mat-table class="mat-elevation-z8" [dataSource]="items">
+
+  <ng-container matColumnDef="isbn">
+    <th mat-header-cell *matHeaderCellDef>ISBN</th>
+    <td mat-cell *matCellDef="let item">{{item.isbn}}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let item">{{item.type}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="sector">
+    <th mat-header-cell *matHeaderCellDef>Sector</th>
+    <td mat-cell *matCellDef="let item">{{ item.lSector }}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let item">{{item.theTitle}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="pDate">
+    <th mat-header-cell *matHeaderCellDef>Publication Date</th>
+    <td mat-cell *matCellDef="let item">{{item.publicationDateModule.date}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="authors">
+    <th mat-header-cell *matHeaderCellDef>Authors</th>
+    <td mat-cell *matCellDef="let item">{{ item.author[0].name}} , {{item.author[1].name}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="noOfpage">
+    <th mat-header-cell *matHeaderCellDef>Number of Pages</th>
+    <td mat-cell *matCellDef="let item">{{item.noOfpages}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="publisher">
+    <th mat-header-cell *matHeaderCellDef>Publisher</th>
+    <td mat-cell *matCellDef="let item">{{item.publisher}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="Available">
+    <th mat-header-cell *matHeaderCellDef>Available</th>
+    <td mat-cell *matCellDef="let item"><i class="material-icons" *ngIf="item.currentReader;else templateName">
+      how_to_reg
+    </i></td>
+    <ng-template #templateName>
+      <td>
+        <img src="green.png" style="  width:10%; height:10%;">
+
+      </td>
+    </ng-template>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+
+<h2>DVD:</h2>
+<table mat-table class="mat-elevation-z8" [dataSource]="lists">
+
+  <ng-container matColumnDef="isbn">
+    <th mat-header-cell *matHeaderCellDef>ISBN</th>
+    <td mat-cell *matCellDef="let list">{{list.isbn}}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let list">{{list.type}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="sector">
+    <th mat-header-cell *matHeaderCellDef>Sector</th>
+    <td mat-cell *matCellDef="let list">{{ list.lSector }}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let list">{{list.theTitle}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="pDate">
+    <th mat-header-cell *matHeaderCellDef>Publication Date</th>
+    <td mat-cell *matCellDef="let list">{{list.publicationDateModule.date}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="lang">
+    <th mat-header-cell *matHeaderCellDef>Languages</th>
+    <td mat-cell *matCellDef="let list">{{list.available_languages}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="subs">
+    <th mat-header-cell *matHeaderCellDef>Subtitles</th>
+    <td mat-cell *matCellDef="let list">{{list.available_subtitles}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="actors">
+    <th mat-header-cell *matHeaderCellDef>Actors</th>
+    <td mat-cell *matCellDef="let list">{{list.actors}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="producer">
+    <th mat-header-cell *matHeaderCellDef>Producer</th>
+    <td mat-cell *matCellDef="let list">{{list.producer}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="Available">
+    <th mat-header-cell *matHeaderCellDef>Available</th>
+    <td mat-cell *matCellDef="let list"><i class="material-icons" *ngIf="list.currentReader;else templateName">
+      how_to_reg
+    </i></td>
+    <ng-template #templateName>
+      <td>
+        <img src="green.png" style="  width:10%; height:10%;">
+
+      </td>
+    </ng-template>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayDvd"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayDvd;"></tr>
+
+</table>

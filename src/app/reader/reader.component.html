@@ -1,0 +1,134 @@
+<h2>Register Reader</h2>
+<div class="text">
+
+  <div id="alert" class="alert" style="display: none;">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <div id="message"></div>
+  </div>
+
+  <form [formGroup]="readerForm" id="frm1" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-5">
+        <label>Reader Id</label>
+      </div>
+      <div class="col-7">
+        <mat-form-field>
+          <input matInput formControlName="readerId"
+                 [class.is-invalid]="readerForm.get('readerId').invalid && readerForm.get('readerId').touched"
+                 class="form-control">
+          <mat-error [class.d-none]="readerForm.get('readerId').valid ||readerForm.get('readerId').untouched"
+                     class="text-danger">reader Id required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-5">
+        <label>Name</label>
+      </div>
+      <div class="col-7">
+        <mat-form-field>
+          <input matInput formControlName="name" class="form-control"
+                 [class.is-invalid]="readerForm.get('name').invalid && readerForm.get('name').touched"
+                 class="form-control">
+          <mat-error [class.d-none]="readerForm.get('name').valid ||readerForm.get('name').untouched"
+                     class="text-danger">name required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <label>Contact No</label>
+      </div>
+      <div class="col-7">
+
+        <mat-form-field>
+
+          <input matInput formControlName="contactNo" class="form-control"
+                 [class.is-invalid]="readerForm.get('contactNo').invalid && readerForm.get('contactNo').touched"
+                 class="form-control" pattern="[2-9]{2}\d{8}">
+          <mat-error
+            [class.d-none]="readerForm.get('contactNo').valid ||readerForm.get('contactNo').untouched ||readerForm.get('contactNo').pattern"
+            class="text-danger">contact Number required
+          </mat-error>
+
+        </mat-form-field>
+        <i class="material-icons">
+          phone
+        </i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <label>Email</label>
+      </div>
+      <div class="col-7">
+
+        <mat-form-field>
+          <input matInput formControlName="email" class="form-control"
+                 [class.is-invalid]="readerForm.get('email').invalid && readerForm.get('email').touched"
+                 class="form-control" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+
+          <mat-error
+            [class.d-none]="readerForm.get('email').valid ||readerForm.get('email').untouched||readerForm.get('email').pattern"
+            class="text-danger">Email required
+          </mat-error>
+
+        </mat-form-field>
+        <i class="material-icons">
+          email
+        </i>
+      </div>
+    </div>
+
+    <div class="button">
+      <button type="submit" style="margin-left: 26px;" mat-raised-button color="warn" [disabled]="!readerForm.valid">ADD Reader <i
+        class="material-icons">
+        add
+      </i></button>
+
+      <button style="margin-left: 226px;" type=reset mat-raised-button color="primary"> Clear Form</button>
+
+    </div>
+  </form>
+
+
+</div>
+<hr>
+
+READERS LIST:
+<table mat-table class="mat-elevation-z8" [dataSource]="readerList">
+
+  <ng-container matColumnDef="readerId">
+    <th mat-header-cell *matHeaderCellDef>Reader Id</th>
+    <td mat-cell *matCellDef="let reader">{{reader.rId}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Full Name</th>
+    <td mat-cell *matCellDef="let reader">{{reader.name}}</td>
+
+
+  </ng-container>
+  <ng-container matColumnDef="contact">
+    <th mat-header-cell *matHeaderCellDef>Mobile Number</th>
+    <td mat-cell *matCellDef="let reader">{{reader.mobile_number}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let reader">{{reader.emailR}}</td>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+        

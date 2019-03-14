@@ -1,0 +1,315 @@
+<div class="text">
+  <h2>Fill the details below to add a library Item</h2></div>
+
+<h3 id="space"></h3>
+
+<div id="alert" class="alert" style="display: none;">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <div id="message"></div>
+</div>
+
+<div class="row">
+  <div class="col-5">
+
+    <label>Select the Type of Library Item</label>
+  </div>
+  <div class="col-7">
+    <mat-form-field>
+      <select matNativeControl required id="type">
+        <option value="Book">Book</option>
+        <option value="Dvd">Dvd</option>
+      </select>
+    </mat-form-field>
+  </div>
+</div>
+<form [formGroup]="bookForm" #userForm="ngForm" id="frm1" (ngSubmit)="onSubmit()" class="example-container">
+
+  <h1>Add a Book:</h1>
+
+  <div class="row">
+    <div class="col-5">
+      <label>ISBN Id</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="isbn" class="form-control" pattern="^(97(8|9))?\d{9}(\d|X)$"
+               [class.is-invalid]="bookForm.get('isbn').invalid && bookForm.get('isbn').touched">
+
+
+        <mat-error [class.d-none]="bookForm.get('isbn').valid ||bookForm.get('isbn').untouched" class="text-danger">isbn
+          required
+        </mat-error>
+        <mat-error [class.d-none]="bookForm.get('isbn').pattern" class="text-danger">ISBN SHOULD BE BETWEEN 10 to 13
+          required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Title</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="title" class="form-control"
+               [class.is-invalid]="bookForm.get('title').invalid && bookForm.get('title').touched" class="form-control">
+      </mat-form-field>
+      <mat-error [class.d-none]="bookForm.get('title').valid ||bookForm.get('title').untouched" class="text-danger">
+        title required
+      </mat-error>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <label>Sector</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="sector" class="form-control"
+               [class.is-invalid]="bookForm.get('sector').invalid && bookForm.get('sector').touched"
+               class="form-control">
+
+        <mat-error [class.d-none]="bookForm.get('sector').valid ||bookForm.get('sector').untouched" class="text-danger">
+          Sector required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>publication Date</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+
+        <input id="lp" matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="pDate"
+               class="form-control" [class.is-invalid]="bookForm.get('pDate').invalid && bookForm.get('pDate').touched"
+               class="form-control">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error [class.d-none]="bookForm.get('pDate').valid ||bookForm.get('pDate').untouched" class="text-danger">
+          Publication Date required
+        </mat-error>
+      </mat-form-field>
+
+
+    </div>
+
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-5">
+      <label>Publisher</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="Publisher" class="form-control"
+               [class.is-invalid]="bookForm.get('Publisher').invalid && bookForm.get('Publisher').touched"
+               class="form-control">
+
+        <mat-error [class.d-none]="bookForm.get('Publisher').valid ||bookForm.get('Publisher').untouched"
+                   class="text-danger">Publisher required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <label>*Author</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput placeholder="author1" formControlName="author1" class="form-control"
+               [class.is-invalid]="bookForm.get('author1').invalid && bookForm.get('author1').touched"
+               class="form-control">
+
+        <mat-error [class.d-none]="bookForm.get('author1').valid ||bookForm.get('author1').untouched"
+                   class="text-danger">Author required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="author2" formControlName="author2" class="form-control">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Number of pages</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput name="noOfpages" pattern="^[0-9]*$" formControlName="noOfpages" class="form-control" 
+               [class.is-invalid]="bookForm.get('noOfpages').invalid && bookForm.get('noOfpages').touched"
+               class="form-control">
+
+        <mat-error [class.d-none]="bookForm.get('noOfpages').valid ||bookForm.get('noOfpages').pattern||bookForm.get('noOfpages').untouched"
+                   class="text-danger">Number of pages is required
+        </mat-error>
+        
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <br>
+  <div class="button">
+    <button type="submit" style="margin-left: 26px;" mat-raised-button color="warn" [disabled]="!bookForm.valid">ADD Book<i class="material-icons">
+      add
+    </i></button>
+
+    <button style="margin-left: 226px;" type=reset mat-raised-button color="primary"> CLEAR</button>
+
+  </div>
+
+</form>
+
+
+<form [formGroup]="dvdForm" id="frm2" (ngSubmit)="dvd()">
+  <h2>Add a DVD</h2>
+  <div class="row">
+    <div class="col-5">
+      <label>ISBN</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+
+        <input matInput formControlName="isbn" class="form-control"
+               [class.is-invalid]="dvdForm.get('isbn').invalid && dvdForm.get('isbn').touched" class="form-control">
+        <mat-error [class.d-none]="dvdForm.get('isbn').valid ||dvdForm.get('isbn').untouched" class="text-danger">isbn
+          required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Title</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="title" class="form-control"
+               [class.is-invalid]="dvdForm.get('title').invalid && dvdForm.get('title').touched" class="form-control">
+        <mat-error [class.d-none]="dvdForm.get('title').valid ||dvdForm.get('title').untouched" class="text-danger">
+          title required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <label>Sector</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="sector" class="form-control"
+               [class.is-invalid]="dvdForm.get('sector').invalid && dvdForm.get('sector').touched" class="form-control">
+        <mat-error [class.d-none]="dvdForm.get('sector').valid ||dvdForm.get('sector').untouched" class="text-danger">
+          Sector required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Publication Date</label>
+    </div>
+    <div class="col-7">
+
+
+      <input id="lp" type="Date" formControlName="pDate" class="form-control"
+             [class.is-invalid]="dvdForm.get('pDate').invalid && dvdForm.get('pDate').touched" class="form-control">
+      <mat-error [class.d-none]="dvdForm.get('pDate').valid ||dvdForm.get('pDate').untouched" class="text-danger">
+        Publication Date required
+      </mat-error>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Available Languages:</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <select matNativeControl required formControlName="Lang" class="form-control">
+          <option *ngFor="let  lang of langs">{{lang}}</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field>
+        <select matNativeControl required formControlName="aLang2" class="form-control">
+          <option *ngFor="let  lang of langs">{{lang}}</option>
+        </select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <label>Subtitles</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <select matNativeControl required formControlName="subz" class="form-control">
+          <option *ngFor="let  lang of langs">{{lang}}</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field>
+        <select matNativeControl required formControlName="sub2" class="form-control">
+          <option *ngFor="let  lang of langs">{{lang}}</option>
+        </select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Producer</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="producer" id="producer" size="20" placeholder="Producer"
+               [class.is-invalid]="dvdForm.get('producer').invalid && dvdForm.get('producer').touched"
+               class="form-control">
+        <mat-error [class.d-none]="dvdForm.get('producer').valid ||dvdForm.get('producer').untouched"
+                   class="text-danger">Producer required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <label>Actors</label>
+    </div>
+    <div class="col-7">
+      <mat-form-field>
+        <input matInput formControlName="Actors" class="form-control" producer id="actors" size="20"
+               placeholder="Actors" [class.is-invalid]="dvdForm.get('Actors').invalid && dvdForm.get('Actors').touched"
+               class="form-control">
+
+        <mat-error [class.d-none]="dvdForm.get('Actors').valid ||dvdForm.get('Actors').untouched" class="text-danger">
+          Actors required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <br>
+
+  <div class="button">
+    <button type="submit" style="margin-left: 26px;" mat-raised-button color="warn" [disabled]="!dvdForm.valid">ADD Dvd<i class="material-icons">
+      add
+    </i></button>
+
+
+    <button style="margin-left: 226px;" type=reset mat-raised-button color="primary"> Clear Form</button>
+
+  </div>
+
+
+</form>

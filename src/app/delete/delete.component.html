@@ -1,0 +1,24 @@
+<h1>
+  Enter the Library Item Isbn :
+</h1>
+
+<div id="outPopUp">
+  <div>
+    <label>isbn:</label>
+    <mat-form-field>
+      <input matInput id="id">
+    </mat-form-field>
+  </div>
+  <div>
+    <div id="type"></div>
+    <br>
+    <span *ngIf="confirmDelete">
+    <span>Are you sure you want to delete?</span>
+    <button class="btn btn-danger" (click)="setValue()">Yes</button>
+
+  <button class="btn btn-primary" (click)="confirmDelete=false">No</button>
+  </span>
+    <button *ngIf="!confirmDelete" class="btn btn-danger" (click)="confirmDelete=true">Delete</button>
+  </div>
+</div>
+<div id="type"></div>

@@ -1,0 +1,72 @@
+<div class="text">
+
+  <h2>Fill the details below to Reserve a library Item</h2>
+  <form [formGroup]="reserveForm" #userForm="ngForm" id="frm1" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-5">
+        <label>iSBN Id</label>
+      </div>
+      <div class="col-7">
+        <mat-form-field>
+
+          <input matInput formControlName="isbn" class="form-control"
+                 [class.is-invalid]="reserveForm.get('isbn').invalid && reserveForm.get('isbn').touched"
+                 class="form-control">
+
+          <mat-error [class.d-none]="reserveForm.get('isbn').valid ||reserveForm.get('isbn').untouched"
+                     class="text-danger">isbn required
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5">
+        <label>Days you want to borrow it for :</label>
+      </div>
+      <div class="col-7">
+
+        <mat-form-field>
+
+          <input id="lp" matInput formControlName="pDate" class="form-control"
+                 [class.is-invalid]="reserveForm.get('pDate').invalid && reserveForm.get('pDate').touched"
+                 class="form-control">
+          <mat-error [class.d-none]="reserveForm.get('pDate').valid ||reserveForm.get('pDate').untouched"
+                     class="text-danger">Number of days is required
+          </mat-error>
+        </mat-form-field>
+
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <label>Reader Id</label>
+      </div>
+      <div class="col-7">
+        <mat-form-field>
+
+          <input matInput formControlName="readerId" class="form-control"
+                 [class.is-invalid]="reserveForm.get('readerId').invalid && reserveForm.get('readerId').touched"
+                 class="form-control">
+          <mat-error [class.d-none]="reserveForm.get('readerId').valid ||reserveForm.get('readerId').untouched"
+                     class="text-danger">isbn required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div id="message"></div>
+    <div class="button">
+      <button type="submit" style="margin-left: 26px;" mat-raised-button color="warn">Reserve</button>
+
+      <button style="margin-left: 226px;" type=reset mat-raised-button color="primary"> Clear Form</button>
+
+    </div>
+  </form>
+
+
+</div>

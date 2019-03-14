@@ -1,0 +1,50 @@
+<h2>Fill the details below to Return a library Item</h2>
+<form [formGroup]="returnForm" #userForm="ngForm" id="frm1" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-5">
+      <label>iSBN Id</label>
+    </div>
+    <div class="col-75">
+      <mat-form-field>
+        <input matInput formControlName="isbn" class="form-control"
+               [class.is-invalid]="returnForm.get('isbn').invalid && returnForm.get('isbn').touched"
+               class="form-control">
+        <mat-error [class.d-none]="returnForm.get('isbn').valid ||returnForm.get('isbn').untouched" class="text-danger">
+          isbn required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <label>Returned Date</label>
+    </div>
+    <div class="col-7">
+
+
+      <input id="lp" type="datetime-local" formControlName="pDate" class="form-control"
+             [class.is-invalid]="returnForm.get('pDate').invalid && returnForm.get('pDate').touched"
+             class="form-control">
+      <i class="material-icons">
+        calendar_today
+      </i>
+      <mat-error [class.d-none]="returnForm.get('pDate').valid ||returnForm.get('pDate').untouched" class="text-danger">
+        Publication Date required
+      </mat-error>
+
+    </div>
+  </div>
+  <h2 id="cost"></h2>
+
+  <br>
+  <br>
+  <div class="button">
+    <button type="submit" style="margin-left: 26px;" mat-raised-button color="warn">Return Item</button>
+
+    <button style="margin-left: 226px;" type=reset mat-raised-button color="primary"> Clear Form</button>
+
+  </div>
+</form>
+  

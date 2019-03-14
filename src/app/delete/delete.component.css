@@ -1,0 +1,19 @@
+h1{
+    margin: auto;
+    
+   
+    padding: 10px;
+}
+
+#outPopUp {
+    padding: 50px;
+    border: 3px solid ;
+    position: absolute;
+  width: auto;
+  height:auto;
+  z-index: 15;
+  top: 80%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  
+  }

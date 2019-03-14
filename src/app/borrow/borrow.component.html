@@ -1,0 +1,111 @@
+<div class="text">
+
+  <h2>Fill the details below to Borrow a library Item</h2>
+
+
+  <div id="alert" class="alert" style="display: none;">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <div id="message"></div>
+  </div>
+
+
+  <form [formGroup]="borrowForm" #userForm="ngForm" id="frm1" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-5">
+        <label>iSBN Id</label>
+      </div>
+      <div class="col-7">
+        <mat-form-field>
+          <input matInput formControlName="isbn"
+                 [class.is-invalid]="borrowForm.get('isbn').invalid && borrowForm.get('isbn').touched"
+                 pattern="^(97(8|9))?\d{9}(\d|X)$" class="form-control">
+          <mat-error [class.d-none]="borrowForm.get('isbn').valid ||borrowForm.get('isbn').untouched"
+                     class="text-danger">isbn required
+          </mat-error>
+          <mat-error [class.d-none]="borrowForm.get('isbn').valid ||borrowForm.get('isbn').pattern" class="text-danger">
+            ISBN SHOULD BE BETWEEN 10 to 13 required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-5">
+        <label>*Borrowed Date</label>
+      </div>
+      <div class="col-7">
+
+
+        <input id="lp" type="datetime-local" formControlName="pDate" class="form-control"
+               [class.is-invalid]="borrowForm.get('pDate').invalid && borrowForm.get('pDate').touched"
+               class="form-control">
+        <i class="material-icons">
+          calendar_today
+        </i>
+        <mat-error [class.d-none]="borrowForm.get('pDate').valid ||borrowForm.get('pDate').untouched"
+                   class="text-danger">Publication Date required
+        </mat-error>
+
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <label>Reader Id</label>
+      </div>
+      <div class="col-7">
+        <mat-form-field>
+          <input matInput formControlName="readerId" class="form-control"
+                 [class.is-invalid]="borrowForm.get('readerId').invalid && borrowForm.get('readerId').touched"
+                 class="form-control">
+          <mat-error [class.d-none]="borrowForm.get('readerId').valid ||borrowForm.get('readerId').untouched"
+                     class="text-danger">isbn required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="button">
+      <button type="submit" style="margin-left: 26px;" mat-raised-button color="warn">Borrow</button>
+
+      <button style="margin-left: 226px;" type=reset mat-raised-button color="primary"> Clear Form</button>
+
+    </div>
+
+
+  </form>
+  <br>
+  <br>
+  <br>
+  <br>
+
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Borrowed Overdue Library Item Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <ul>
+      <li *ngFor="let rep of report">
+
+        <b>ISBN rId:</b> {{rep.isbn}}
+        <br>
+        <b>READER rId:</b>{{rep.currentReader.id}}
+        <br>
+        <b>DUECOST:$ </b>{{rep.dueCost}}
+
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>
+
+Click to view the report of overdue Items:
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Generate Report</button>

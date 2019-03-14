@@ -1,0 +1,41 @@
+<h2>
+  REPORT OF BORROWED LIBRARY ITEMS:
+</h2>
+
+<table mat-table class="mat-elevation-z8" [dataSource]="reports">
+
+  <ng-container matColumnDef="isbn">
+    <th mat-header-cell *matHeaderCellDef>ISBN</th>
+    <td mat-cell *matCellDef="let report">{{report.isbn}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let report">{{report.theTitle}}</td>
+
+
+  </ng-container>
+  <ng-container matColumnDef="Due Cost">
+    <th mat-header-cell *matHeaderCellDef>Due Cost</th>
+    <td mat-cell *matCellDef="let report">${{report.dueCost}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="bDate">
+    <th mat-header-cell *matHeaderCellDef>Borrowed Date</th>
+    <td mat-cell *matCellDef="let report">{{report.borrowed.date}}</td>
+
+  </ng-container>
+  <ng-container matColumnDef="Available">
+    <th mat-header-cell *matHeaderCellDef>Reader Id</th>
+    <td mat-cell *matCellDef="let report"> {{report.currentReader.rId}}</td>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+<h4 style="float: right;">Total Due Cost :${{total}}</h4>
